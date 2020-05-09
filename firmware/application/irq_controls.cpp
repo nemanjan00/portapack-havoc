@@ -153,7 +153,7 @@ static bool encoder_read() {
 		if( new_direction != encoder_direction ) {
 			encoder_wrong_direction_count++;
 
-			if(encoder_wrong_direction_count > 1) {
+			if(encoder_wrong_direction_count > 3) {
 				encoder_direction = new_direction;
 
 				encoder_wrong_direction_count = 0;
