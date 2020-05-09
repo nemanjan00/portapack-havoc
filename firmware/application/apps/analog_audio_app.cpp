@@ -138,6 +138,8 @@ AnalogAudioView::AnalogAudioView(
 		this->on_show_options_modulation();
 	};
 
+	this->on_headphone_volume_changed(75);
+
 	field_volume.set_value((receiver_model.headphone_volume() - audio::headphone::volume_range().max).decibel() + 99);
 	field_volume.on_change = [this](int32_t v) {
 		this->on_headphone_volume_changed(v);
