@@ -134,16 +134,40 @@ static bool switches_update(const uint8_t raw) {
 	return switch_changed;
 }
 
+int encoder_wrong_direction_count = 0;
+int encoder_direction = -1;
+
 static bool encoder_read() {
-	const auto delta = encoder.update(
+	auto delta = encoder.update(
 		switch_debounce[5].state(),
 		switch_debounce[6].state()
 	);
 
+	int new_direction = delta > 0;
+
+	if(encoder_direction == -1) {
+		encoder_direction = new_direction;
+	}
+
 	if( delta != 0 ) {
+		if( new_direction != encoder_direction ) {
+			encoder_wrong_direction_count++;
+
+			if(encoder_wrong_direction_count > 2) {
+				encoder_direction = new_direction;
+
+				encoder_wrong_direction_count = 0;
+			} else {
+				delta *= -1;
+			}
+		} else {
+			encoder_wrong_direction_count = 0;
+		}
+
 		encoder_position += delta;
-		return true;;
+		return true;
 	} else {
+		encoder_wrong_direction_count++;
 		return false;
 	}
 }
