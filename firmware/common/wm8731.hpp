@@ -341,9 +341,6 @@ public:
 		headphone_mute();
 	}
 
-	void speaker_enable() {};
-	void speaker_disable() {};
-
 	void microphone_enable() override {
 		// TODO: Implement
 	}

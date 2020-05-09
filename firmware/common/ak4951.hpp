@@ -833,9 +833,6 @@ public:
 	void headphone_enable() override;
 	void headphone_disable() override;
 
-	/*void speaker_enable() override;
-	void speaker_disable() override;*/
-
 	void speaker_enable();
 	void speaker_disable();
 
