@@ -192,7 +192,7 @@ void timer0_callback(GPTDriver* const) {
 /* TODO: Refactor some/all of this to appropriate shared headers? */
 static constexpr uint32_t timer0_count_f = 1000000;
 static constexpr uint32_t timer0_prescaler_ratio = (base_m0_clk_f / timer0_count_f);
-static constexpr uint32_t ui_interrupt_rate = 100;
+static constexpr uint32_t ui_interrupt_rate = 10000;
 static constexpr uint32_t timer0_match_count = timer0_count_f / ui_interrupt_rate;
 
 /* GPT driver refers to configuration structure during runtime, so make sure
