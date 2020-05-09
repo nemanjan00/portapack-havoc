@@ -106,7 +106,6 @@ SystemStatusView::SystemStatusView(
 		&backdrop,
 		&button_back,
 		&title,
-		&button_speaker,
 		&button_stealth,
 		//&button_textentry,
 		&button_camera,
