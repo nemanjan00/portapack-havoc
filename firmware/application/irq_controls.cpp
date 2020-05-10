@@ -134,7 +134,7 @@ static bool switches_update(const uint8_t raw) {
 	return switch_changed;
 }
 
-int encoder_wrong_direction_count = 0;
+int encoder_wrong_direction_count = 5;
 int encoder_direction = -1;
 
 static bool encoder_read() {
