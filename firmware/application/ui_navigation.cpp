@@ -448,11 +448,11 @@ SystemMenuView::SystemMenuView(NavigationView& nav) {
 		{ "Transmit", 	ui::Color::green(),			&bitmap_icon_transmit,	[this, &nav](){ enable_warning(); nav.push<TransmittersMenuView>(); } },
 		{ "Capture",				ui::Color::blue(),		&bitmap_icon_capture,	[this, &nav](){ enable_warning(); nav.push<CaptureAppView>(); } },
 		{ "Replay",					ui::Color::purple(),	&bitmap_icon_replay,	[this, &nav](){ enable_warning(); nav.push<ReplayAppView>(); } },
-		{ "Calls",		ui::Color::yellow(),	    &bitmap_icon_closecall,	[this, &nav](){ enable_warning(); nav.push<SearchView>(); } },
+		{ "Calls",		ui::Color::yellow(),	    &bitmap_icon_search,	[this, &nav](){ enable_warning(); nav.push<SearchView>(); } },
 		{ "Scanner",	ui::Color::orange(),		&bitmap_icon_scanner,	[this, &nav](){ enable_warning(); nav.push<ScannerView>(); } },
 		{ "Tools",				ui::Color::light_grey(),	&bitmap_icon_utilities,	[this, &nav](){ enable_warning(); nav.push<UtilitiesMenuView>(); } },
 		{ "Settings", 	ui::Color::cyan(),			&bitmap_icon_setup,	  	[this, &nav](){ enable_warning(); nav.push<SettingsMenuView>(); } },
-		{ "Debug",		ui::Color::cyan(),			nullptr,   				[this, &nav](){ enable_warning(); nav.push<DebugMenuView>(); } },
+		{ "Debug",		ui::Color::cyan(),			&bitmap_icon_debug,   				[this, &nav](){ enable_warning(); nav.push<DebugMenuView>(); } },
 		{ "HackRF", 	ui::Color::cyan(),			&bitmap_icon_hackrf,	[this, &nav](){ hackrf_mode(nav); } },
 		//{ "About", 		ui::Color::cyan(),			nullptr,				[&nav](){ nav.push<AboutView>(); } }
 	});
