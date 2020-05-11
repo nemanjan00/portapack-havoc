@@ -418,15 +418,11 @@ UtilitiesMenuView::UtilitiesMenuView(NavigationView& nav) {
 /* SystemMenuView ********************************************************/
 
 void SystemMenuView::hackrf_mode(NavigationView& nav) {
-<<<<<<< HEAD
 	if(!this->hackrf_warning) {
 		return EventDispatcher::request_stop();
 	}
 
-	nav.push<ModalMessageView>("Confirm", "Switch to HackRF mode ?", YESNO,
-=======
 	nav.push<ModalMessageView>("HackRF mode", "This mode enables the USB\nfunctionality. Reset the\ndevice to get back.\n\nDo you want to Switch now?", YESNO,
->>>>>>> b48b0efe5ce659705744ee55020e2a0972baaf72
 		[this](bool choice) {
 			if (choice) {
 				EventDispatcher::request_stop();
