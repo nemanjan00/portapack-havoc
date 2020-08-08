@@ -106,6 +106,7 @@ SystemStatusView::SystemStatusView(
 		&backdrop,
 		&button_back,
 		&title,
+		&button_title,
 		&button_speaker,
 		&button_stealth,
 		//&button_textentry,
@@ -137,6 +138,10 @@ SystemStatusView::SystemStatusView(
 	button_back.on_select = [this](ImageButton&){
 		if (this->on_back)
 			this->on_back();
+	};
+
+	button_title.on_select = [this](ImageButton&) {
+		this->on_title();
 	};
 	
 	button_speaker.on_select = [this](ImageButton&) {
@@ -194,8 +199,23 @@ void SystemStatusView::refresh() {
 }
 
 void SystemStatusView::set_back_enabled(bool new_value) {
-	button_back.set_foreground(new_value ? Color::white() : Color::dark_grey());
-	button_back.set_focusable(new_value);
+	
+	if(new_value){
+		add_child(&button_back);
+	}
+	else{
+		remove_child(&button_back);
+	}
+}
+
+void SystemStatusView::set_title_image_enabled(bool new_value) {
+
+	if(new_value){
+		add_child(&button_title);
+	}
+	else{
+		remove_child(&button_title);
+	}
 }
 
 void SystemStatusView::set_title(const std::string new_value) {
@@ -280,6 +300,10 @@ void SystemStatusView::on_camera() {
 		portapack::display.read_pixels({ 0, i, 240, 1 }, row);
 		png.write_scanline(row);
 	}
+}
+
+void SystemStatusView::on_title() {
+	nav_.push<AboutView>();
 }
 
 /* Navigation ************************************************************/
@@ -383,7 +407,7 @@ ReceiversMenuView::ReceiversMenuView(NavigationView& nav) {
 	add_items({
 		//{ "..", 		ui::Color::light_grey(),&bitmap_icon_previous,	[&nav](){ nav.pop(); } },
 		{ "ADS-B", 		ui::Color::green(),		&bitmap_icon_adsb,		[&nav](){ nav.push<ADSBRxView>(); }, },
-		{ "ACARS", 		ui::Color::yellow(),	&bitmap_icon_adsb,		[&nav](){ nav.push<ACARSAppView>(); }, },
+		//{ "ACARS", 		ui::Color::yellow(),	&bitmap_icon_adsb,		[&nav](){ nav.push<ACARSAppView>(); }, },
 		{ "AIS Boats",	ui::Color::green(),		&bitmap_icon_ais,		[&nav](){ nav.push<AISAppView>(); } },
 		{ "AFSK", 		ui::Color::yellow(),	&bitmap_icon_modem,	[&nav](){ nav.push<AFSKRxView>(); } },
 		{ "BTLE",		ui::Color::yellow(),	&bitmap_icon_btle,		[&nav](){ nav.push<BTLERxView>(); } },
@@ -525,8 +549,11 @@ SystemView::SystemView(
 	});
 	navigation_view.on_view_changed = [this](const View& new_view) {
 		this->status_view.set_back_enabled(!this->navigation_view.is_top());
+		this->status_view.set_title_image_enabled(this->navigation_view.is_top());
+		this->status_view.set_dirty();
 		this->status_view.set_title(new_view.title());
 	};
+	
 
 	// portapack::persistent_memory::set_playdead_sequence(0x8D1);
 				
